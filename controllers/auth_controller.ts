@@ -4,28 +4,20 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 export async function login(req: Request, res: Response) {
   try {
-    // const { email, password, nickname } = req.body;
-    const password = "I hate myself";
-    const user = {
-      nickname: "Josd",
-      password: "I hate myself",
-      email: "Emily@gmail.com",
-    };
-    // const user = db.getUserByName(nickname);
+    const { email, password, nickname } = req.body;
+
+    const user = db.getUserByName(nickname, password);
     if (!user) {
       return res.status(401).json({ error: "Authentication failed user" });
     }
-    // const match = await bcrypt.compare(password, user.password);
-    // if (!match) {
-    //   return res.status(401).json({ error: "Authentication failed password" });
-    // }
     console.log("username and password worked");
+
     // Generate JWT token
     const secret = process.env.SECRET_KEY;
     jwt.sign(
       { user },
-      "secretkey",
-      { expiresIn: "30s" },
+      secret,
+      { expiresIn: "30m" },
       (err: any, token: String) => {
         res.json({
           token,
@@ -37,7 +29,7 @@ export async function login(req: Request, res: Response) {
   }
 }
 export async function signup(req: Request, res: Response) {
-  const { nickname, password, email } = req.body;
+  const { nickname, password, email, role } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10);
-  await db.createUser(nickname, hashedPassword, email);
+  await db.createUser(nickname, hashedPassword, email, role);
 }
