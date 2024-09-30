@@ -1,71 +1,117 @@
 const { PrismaClient } = require("@prisma/client");
-const { uuid } = require('uuidv4');
+const { uuid } = require("uuidv4");
 const prisma = new PrismaClient();
-const bcrypt = require("bcryptjs")
-function getArticles  (){
-  return prisma.article.findMany({})
+import { User } from "../controllers/signup_controller";
+const bcrypt = require("bcrypt");
+// Posts CRUD
+function getPosts() {
+  return prisma.Post.findMany({});
 }
-function getArticle  (id){
-  return prisma.user.findUnique({where:id})
+function getPost(id: String) {
+  return prisma.user.findUnique({ where: id });
+}
+function createPost(
+  title: String,
+  content: String,
+  isPublished: boolean,
+  userId: String
+) {
+  return prisma.Post.create({
+    data: {
+      title,
+      content,
+      isPublished,
+      userId,
+    },
+  });
+}
+function editPost(
+  id: String,
+  title: String,
+  content: String,
+  isPublished: boolean
+) {
+  return prisma.Post.update({
+    where: { id },
+    data: { title, content, isPublished },
+  });
+}
+function deletePost(id: String) {
+  return prisma.Post.delete({
+    where: {
+      id,
+    },
+  });
+}
 
+// COMMENTS CRUD
+function getCommentsByPostId(id: String) {
+  return prisma.comment.findUnique({ where: id });
 }
-function getComments  (){
-  return prisma.comment.findMany({})
 
+function getUserComments(userId: String) {
+  // const authorId = "";
+  return prisma.comment.findMany({ where: { userId } });
 }
-function getComment  (id){
-  return prisma.comment.findUnique({where:id})
+function createComment(postId: String, email: String, nickname: String) {
+  return prisma.comment.create({
+    data: {
+      email,
+      nickname,
+    },
+    where: {},
+  });
+}
+function editComment(id: String, message: String) {
+  return prisma.comment.edit({ where: { id }, data: { message } });
+}
+function deleteComment(id: String) {
+  return prisma.comment.delete({ where: { id } });
+}
 
+function createUser({
+  nickname,
+  password,
+  email,
+  role = "User",
+}: Omit<User, "id">): Promise<User> {
+  return prisma.user.create({
+    data: {
+      email,
+      nickname,
+      password,
+      role,
+    },
+  });
 }
-function getUser  (id){
-  return prisma.user.findUnique({where:id})
 
+function deleteUser(id: String) {
+  return prisma.user.delete({ where: id });
 }
-function createArticle  (){
-  return prisma.article.create({data:{
-    email,nickname
-  }})
-
-}
-function createComment  (id){
-  return prisma.comment.create({data:{
-    email,nickname
-  }})
-}
-function createUser  (id){
-  return prisma.user.create({data:{
-    email,nickname
-  }})
-}
-function editArticle  (id){
-  return prisma.article.edit()
-
-}
-function editComment  (id){
-  return prisma.comment.edit()
-
-}
-function deleteArticle  (id){
-  return prisma.article.edit()
-
-}
-function deleteComment  (id){
-  return prisma.comment.delete()
-}
-function deleteUser  (id){
-  return prisma.user.delete({where:id})
+async function getUser(nickname: String, password: String) {
+  const user = prisma.user.findUnique({ where: nickname });
+  if (!user) {
+    return null;
+  }
+  const match = await bcrypt.compare(password, user.password);
+  if (match) {
+    return user;
+  } else {
+    return null;
+  }
 }
 module.exports = {
-  getArticles,
-  getArticle,
-  getComments,
-  getComment,
+  getPosts,
+  getPost,
+  getCommentsByPostId,
+  getUserComments,
   getUser,
-  createArticle,
+  createPost,
   createComment,
   createUser,
-  editArticle,
+  editPost,
   editComment,
-  deleteArticle,
+  deletePost,
   deleteComment,
-  deleteUser}
+  deleteUser,
+};
