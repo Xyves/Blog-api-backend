@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.ts",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed:init": "ts-node ./src/seeds/init.ts"
+    "seed": "ts-node prisma/seed.ts"
   },
   "keywords": [],
   "author": "",
