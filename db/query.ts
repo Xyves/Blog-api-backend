@@ -1,7 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const { uuid } = require("uuidv4");
 const prisma = new PrismaClient();
-import { User } from "../controllers/signup_controller";
+const { User } = require("../controllers/signup_controller");
 const bcrypt = require("bcrypt");
 // Posts CRUD
 function getPosts() {
@@ -74,7 +74,7 @@ function createUser({
   password,
   email,
   role = "User",
-}: Omit<User, "id">): Promise<User> {
+}: Omit<typeof User, "id">): Promise<typeof User> {
   return prisma.user.create({
     data: {
       email,

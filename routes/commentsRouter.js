@@ -4,6 +4,7 @@ const router = Router();
 const multer = require("multer");
 const { verifyToken } = require("../middleware/authMiddleware");
 const commentsController = require("../controllers/comment_controller");
+
 //Get  Specific comment by id
 router.get("/comments/:commentId", commentsController.getCommentById);
 // Get all comments on specific post

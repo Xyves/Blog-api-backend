@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 const { db } = require("../db/query");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-export async function login(req: Request, res: Response) {
+async function login(req: Request, res: Response) {
   try {
     const { email, password, nickname } = req.body;
 
@@ -28,8 +28,9 @@ export async function login(req: Request, res: Response) {
     res.status(500).json({ error: "Login failed" });
   }
 }
-export async function signup(req: Request, res: Response) {
+async function signup(req: Request, res: Response) {
   const { nickname, password, email, role } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10);
   await db.createUser(nickname, hashedPassword, email, role);
 }
+module.exports = { login, signup };

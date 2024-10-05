@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+// import { Request, Response, NextFunction } from "express";
 const { db } = require("../db/query");
 
 export interface User {

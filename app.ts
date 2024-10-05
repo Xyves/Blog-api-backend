@@ -4,7 +4,8 @@ const bodyParser = require("body-parser");
 const blogsRouter = require("./routes/blogsRouter");
 const authRouter = require("./routes/authRouter");
 const commentsRouter = require("./routes/commentsRouter");
-
+const cors = require("cors");
+app.use(cors());
 const port = 3000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
