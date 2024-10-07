@@ -12,21 +12,27 @@
     "start": "ts-node app.ts"
   },
   "keywords": [],
+  "type": "module",
   "author": "",
   "compilerOptions": {
-    "target": "ES2020",      
-    "module": "ESNext",       
+    "target": "ES2020",
+    "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
-    "esModuleInterop": true,  
+    "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",       
-    "rootDir": "./src",       
-   "allowJs": true           
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "allowJs": true
   },
-  "include": ["src/**/*.ts", "src/**/*.js"], 
-  "exclude": ["node_modules"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.20.0",
