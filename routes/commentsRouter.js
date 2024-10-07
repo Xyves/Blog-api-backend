@@ -1,7 +1,5 @@
-const { Router } = require("express");
-const passport = require("passport");
-const commentsRouter = Router();
-const multer = require("multer");
+const express = require("express");
+const commentsRouter = express.Router();
 const { verifyToken } = require("../middleware/authMiddleware");
 const commentsController = require("../controllers/comment_controller");
 
@@ -17,4 +15,4 @@ commentsRouter.get(
   "/users/:userId/comments",
   commentsController.getUserComments
 );
-export default commentsRouter;
+module.exports = commentsRouter;

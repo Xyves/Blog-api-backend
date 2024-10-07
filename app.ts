@@ -1,19 +1,20 @@
-import express from "express";
+const express = require("express");
 const app = express();
-import { Request, Response, NextFunction } from "express";
-import bodyParser from "body-parser";
+const { Request, Response, NextFunction } = require("express");
+import type { Request, Response, NextFunction } from "express";
+const bodyParser = require("body-parser");
 // @ts-ignore
-import blogsRouter from "./routes/blogsRouter";
-// @ts-ignore
-
-import authRouter from "./routes/authRouter";
-
+const blogsRouter = require("./routes/blogsRouter");
 // @ts-ignore
 
-import commentsRouter from "./routes/commentsRouter";
+const authRouter = require("./routes/authRouter");
+
 // @ts-ignore
 
-import cors from "cors";
+const commentsRouter = require("./routes/commentsRouter");
+// @ts-ignore
+
+const cors = require("cors");
 app.use(cors());
 const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));

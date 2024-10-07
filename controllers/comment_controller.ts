@@ -1,4 +1,5 @@
-import { Request, Response, NextFunction } from "express";
+const { Request, Response, NextFunction } = require("express");
+import type { Request, Response, NextFunction } from "express";
 const { db } = require("../db/query");
 
 const getCommentById = (req: Request, res: Response, next: NextFunction) => {
@@ -36,7 +37,7 @@ const getCommentsByPostId = (req: Request, res: Response) => {
   const comments = db.getCommentsByPostId(postId);
   res.json(comments);
 };
-interface Comment {
+export interface Comment {
   id: String;
   userId: String;
   articleId: String;

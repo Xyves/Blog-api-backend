@@ -9,23 +9,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "ts-node prisma/seed.ts",
-    "start": "ts-node app.ts"
+    "start": "ts-node app.ts",
+    "start1": "nodemon --watch src --exec node --no-warnings=ExperimentalWarning --loader ts-node/esm app.ts",
+    "dev": "node --loader ts-node/esm --no-warnings=ExperimentalWarning app.ts"
   },
   "keywords": [],
-  "type": "module",
   "author": "",
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "ESNext",
-    "moduleResolution": "node",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "allowJs": true
-  },
   "include": [
     "src/**/*.ts",
     "src/**/*.js"

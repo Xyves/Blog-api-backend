@@ -1,4 +1,5 @@
-import { Request, Response, NextFunction } from "express";
+const { Request, Response, NextFunction } = require("express");
+import type { Request, Response, NextFunction } from "express";
 const { db } = require("../db/query");
 const jwt = require("jsonwebtoken");
 console.log(db);
@@ -48,7 +49,7 @@ async function login(req: Request, res: Response, done: any) {
     res.status(500).json({ error: "Login failed" });
   }
 }
-export async function signup(req: Request, res: Response) {
+async function signup(req: Request, res: Response) {
   const { nickname, password, email, role } = req.body;
   try {
     const hashedPassword = bcrypt.hashSync(password, 10);
