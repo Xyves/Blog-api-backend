@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use("/api/posts/", blogsRouter);
 app.use("/api", commentsRouter);
 app.use("/api", authRouter);
-app.all("*", async (req: any, res: any) => {
+app.all("*", (req: any, res: any) => {
   try {
     res.status(404).json({
       timestamp: Date.now(),
