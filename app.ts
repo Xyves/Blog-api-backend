@@ -1,11 +1,19 @@
-const express = require("express");
+import express from "express";
 const app = express();
 import { Request, Response, NextFunction } from "express";
-const bodyParser = require("body-parser");
-const blogsRouter = require("./routes/blogsRouter");
-const authRouter = require("./routes/authRouter");
-const commentsRouter = require("./routes/commentsRouter");
-const cors = require("cors");
+import bodyParser from "body-parser";
+// @ts-ignore
+import blogsRouter from "./routes/blogsRouter";
+// @ts-ignore
+
+import authRouter from "./routes/authRouter";
+
+// @ts-ignore
+
+import commentsRouter from "./routes/commentsRouter";
+// @ts-ignore
+
+import cors from "cors";
 app.use(cors());
 const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,3 +36,8 @@ app.all("*", async (req: Request, res: Response) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+type ErrorResponse = {
+  timestamp: number;
+  msg: string;
+  code: number;
+};

@@ -1,12 +1,12 @@
-const { Router } = require("express");
+import { Router } from "express";
 const blogRouter = Router();
-const {
+import {
   getPost,
   getPosts,
   createPost,
   updatePost,
   deletePost,
-} = require("../controllers/postController.js");
+} from "../controllers/postController";
 
 const multer = require("multer");
 const { verifyToken } = require("../middleware/authMiddleware");
@@ -18,4 +18,4 @@ blogRouter.get("/:id", getPost);
 blogRouter.put("/:id", updatePost);
 blogRouter.delete("/:id", deletePost);
 
-module.exports = blogRouter;
+export default blogRouter;

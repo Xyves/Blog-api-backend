@@ -1,18 +1,18 @@
 const express = require("express");
 const passport = require("passport");
-const appRouter = express.Router();
+const authRouter = express.Router();
 const authController = require("../controllers/auth_controller");
 
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
-appRouter.post("/login", authController.login);
-appRouter.post(
+authRouter.post("/login", authController.login);
+authRouter.post(
   "/signup",
   // authController.createUserValidation(),
   authController.validateMiddleware,
   authController.signup
 );
-appRouter.get("/logout", (req, res, next) => {
+authRouter.get("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) {
       return next(err);
@@ -20,4 +20,4 @@ appRouter.get("/logout", (req, res, next) => {
     res.redirect("/");
   });
 });
-module.exports = appRouter;
+export default authRouter;
