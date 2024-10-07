@@ -1,5 +1,3 @@
-const { Request, Response, NextFunction } = require("express");
-import type { Request, Response, NextFunction } from "express";
 const { db } = require("../db/query");
 const jwt = require("jsonwebtoken");
 console.log(db);
@@ -7,7 +5,7 @@ const { createUser, getUserByName } = require("../db/query");
 const bcrypt = require("bcrypt");
 const { body, validationResult } = require("express-validator");
 
-async function login(req: Request, res: Response, done: any) {
+async function login(req: any, res: any) {
   console.log("Attempting login");
   try {
     const { password, nickname } = req.body;
@@ -49,7 +47,7 @@ async function login(req: Request, res: Response, done: any) {
     res.status(500).json({ error: "Login failed" });
   }
 }
-async function signup(req: Request, res: Response) {
+async function signup(req: any, res: any) {
   const { nickname, password, email, role } = req.body;
   try {
     const hashedPassword = bcrypt.hashSync(password, 10);
@@ -83,7 +81,7 @@ function createUserValidation() {
       ),
 
     body("passwordConfirmation").custom(
-      (value: string, { req }: { req: Request }) => {
+      (value: string, { req }: { req: any }) => {
         if (value !== req.body.password) {
           throw new Error("Password confirmation does not match password");
         }
@@ -92,7 +90,7 @@ function createUserValidation() {
     ),
   ];
 }
-function validateMiddleware(req: Request, res: Response, next: NextFunction) {
+function validateMiddleware(req: any, res: any, next: any) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });

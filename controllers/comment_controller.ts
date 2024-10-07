@@ -1,38 +1,32 @@
-const { Request, Response, NextFunction } = require("express");
-import type { Request, Response, NextFunction } from "express";
 const { db } = require("../db/query");
 
-const getCommentById = (req: Request, res: Response, next: NextFunction) => {
+const getCommentById = (req: any, res: any) => {
   const { commentId } = req.params;
   const comment = db.getCommentById(commentId);
   res.json(comment);
 };
-const getUserComments = (req: Request, res: Response, next: NextFunction) => {
+const getUserComments = (req: any, res: any) => {
   const { userId } = req.params;
   const comments = db.getUserComments(userId);
   res.json(comments);
 };
-const createComment = (req: Request, res: Response, next: NextFunction) => {
+const createComment = (req: any, res: any) => {
   const { postId } = req.params;
   const { message, userId } = req.body;
   const comments = db.createComment(postId, message, userId);
   return comments;
 };
-const editComment = async (req: Request, res: Response, next: NextFunction) => {
+const editComment = async (req: any, res: any) => {
   const { commentId } = req.params;
   const { message } = req.body;
 
   await db.editComment(commentId, message);
 };
-const deleteComment = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const deleteComment = async (req: any, res: any) => {
   const { commentId } = req.params;
   await db.deleteComment(commentId);
 };
-const getCommentsByPostId = (req: Request, res: Response) => {
+const getCommentsByPostId = (req: any, res: any) => {
   const { postId } = req.params;
   const comments = db.getCommentsByPostId(postId);
   res.json(comments);

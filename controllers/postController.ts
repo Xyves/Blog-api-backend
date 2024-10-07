@@ -1,13 +1,12 @@
 const db = require("../db/query");
-const { Request, Response, NextFunction } = require("express");
-import type { Request, Response, NextFunction } from "express";
+const express = require("express");
 
-const getPosts = async (req: Request, res: Response, next: NextFunction) => {
+const getPosts = async (req: any, res: any) => {
   const Posts = await db.getDbPosts();
   console.log(Posts);
   res.json(Posts);
 };
-const getPost = async (req: Request, res: Response, next: NextFunction) => {
+const getPost = async (req: any, res: any) => {
   const id = req.params.id;
   const post = await db.getPost(id);
   if (!post) {
@@ -16,18 +15,18 @@ const getPost = async (req: Request, res: Response, next: NextFunction) => {
   }
   res.json(post);
 };
-const createPost = async (req: Request, res: Response, next: NextFunction) => {
+const createPost = async (req: any, res: any) => {
   const { title, content, isPublished, userId } = req.body;
   const post = await db.createPost(title, content, isPublished, userId);
   res.json(post);
 };
-const updatePost = async (req: Request, res: Response, next: NextFunction) => {
+const updatePost = async (req: any, res: any) => {
   const { id } = req.params;
   const { title, content, isPublished, userId } = req.body;
   const post = await db.updatePost(id, title, content, isPublished, userId);
   res.json(post);
 };
-const deletePost = async (req: Request, res: Response, next: NextFunction) => {
+const deletePost = async (req: any, res: any) => {
   const id = req.params.id;
   const post = await db.deletePost(id);
   res.json(post);
