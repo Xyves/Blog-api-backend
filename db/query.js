@@ -7,13 +7,14 @@ function getDbPosts() {
 function getPost(id) {
   return prisma.post.findFirst({ where: { id: id } });
 }
-function createPost(title, content, isPublished, userId) {
+function createPost(title, content, isPublished, userId, categories) {
   return prisma.post.create({
     data: {
       title,
       content,
       isPublished,
       userId,
+      categories,
     },
   });
 }

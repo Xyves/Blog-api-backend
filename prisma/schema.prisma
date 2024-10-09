@@ -32,6 +32,7 @@ model Post {
   comments    Comment[]
   User        User?     @relation(fields: [userId], references: [id])
   userId      String?
+  categories  String[]
 }
 
 model Comment {

@@ -16,8 +16,8 @@ const getPost = async (req: any, res: any) => {
   res.json(post);
 };
 const createPost = async (req: any, res: any) => {
-  const { title, content, isPublished, userId } = req.body;
-  const post = await db.createPost(title, content, isPublished, userId);
+  const { title, content, isPublished, userId,categories } = req.body;
+  const post = await db.createPost(title, content, isPublished, userId,categories);
   res.json(post);
 };
 const updatePost = async (req: any, res: any) => {
