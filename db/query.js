@@ -7,6 +7,13 @@ function getDbPosts() {
 function getPost(id) {
   return prisma.post.findFirst({ where: { id: id } });
 }
+function getCategories(postId) {
+  return prisma.post.findMany({ where: { id: postId } });
+}
+function getCommentsCount(postId) {
+  const comments = prisma.comment.findMany({ where: { postId: postId } });
+  return comments.length;
+}
 function createPost(title, content, isPublished, userId, categories) {
   return prisma.post.create({
     data: {
@@ -109,4 +116,6 @@ module.exports = {
   deletePost,
   deleteComment,
   deleteUser,
+  getCategories,
+  getCommentsCount,
 };
