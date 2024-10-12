@@ -33,6 +33,7 @@ model Post {
   User        User?     @relation(fields: [userId], references: [id])
   userId      String?
   categories  String[]
+  imageUrl    String[]
 }
 
 model Comment {
