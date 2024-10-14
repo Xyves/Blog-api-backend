@@ -23,13 +23,13 @@ async function login(req: any, res: any) {
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
       console.log("Incorrect password");
-      return res.status(401).json({ error: "Incorrect password" }); // Using res directly
+      return res.status(401).json({ error: "Incorrect password" });
     }
 
     console.log("Username and password worked");
 
     // Generate JWT token
-    const secret = process.env.SECRET_KEY; // Ensure this environment variable is set
+    const secret = process.env.SECRET_KEY;
     jwt.sign(
       { user: { id: user.id, nickname: user.nickname } }, // Structure payload appropriately
       secret,

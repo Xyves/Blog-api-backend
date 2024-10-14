@@ -6,7 +6,7 @@ const multer = require("multer");
 const { verifyToken } = require("../middleware/authMiddleware");
 
 const upload = multer({ storage: multer.memoryStorage() });
-blogRouter.get("/", verifyToken, postController.getPosts);
+blogRouter.get("/", postController.getPosts);
 blogRouter.post("/", verifyToken, postController.createPost);
 blogRouter.get("/:id", postController.getPost);
 blogRouter.put("/:id", postController.updatePost);

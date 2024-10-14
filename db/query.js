@@ -2,7 +2,12 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 // Posts CRUD
 function getDbPosts() {
-  return prisma.post.findMany({});
+  return prisma.post.findMany({
+    orderBy: {
+      created: "desc",
+    },
+    take: 14,
+  });
 }
 function getPost(id) {
   return prisma.post.findFirst({ where: { id: id } });
@@ -73,21 +78,16 @@ async function createUser(nickname, password, email, role = "USER") {
     },
   });
 }
-// export function createUser({
-//   nickname:String,
-//   password,
-//   email,
-//   role = "User",
-// ){
-//   return prisma.user.create({
-//     data: {
-//       nickname,
-//       password,
-//       email,
-//       role,
-//     },
-//   });
-// }
+export function createUser(nickname, password, email, role = "User") {
+  return prisma.user.create({
+    data: {
+      nickname,
+      password,
+      email,
+      role,
+    },
+  });
+}
 
 function deleteUser(id) {
   return prisma.user.delete({ where: id });
