@@ -7,9 +7,21 @@ const commentsController = require("../controllers/comment_controller");
 commentsRouter.get("/comments/:commentId", commentsController.getCommentById);
 // Get all comments on specific post
 commentsRouter.get("/:postId/comments", commentsController.getCommentsByPostId);
-commentsRouter.post("/:postId/comments", commentsController.createComment);
-commentsRouter.put("/comments/:commentId", commentsController.editComment);
-commentsRouter.delete("/comments/:commentId", commentsController.deleteComment);
+commentsRouter.post(
+  "/:postId/comments",
+  verifyToken,
+  commentsController.createComment
+);
+commentsRouter.put(
+  "/comments/:commentId",
+  verifyToken,
+  commentsController.editComment
+);
+commentsRouter.delete(
+  "/comments/:commentId",
+  verifyToken,
+  commentsController.deleteComment
+);
 // Get all comments by specific user
 commentsRouter.get(
   "/users/:userId/comments",
