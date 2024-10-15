@@ -1,6 +1,5 @@
 const { db } = require("../db/query");
 const jwt = require("jsonwebtoken");
-console.log(db);
 const { createUser, getUserByName } = require("../db/query");
 const bcrypt = require("bcrypt");
 const { body, validationResult } = require("express-validator");

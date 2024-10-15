@@ -3,7 +3,6 @@ const passport = require("passport");
 const authRouter = express.Router();
 const authController = require("../controllers/auth_controller");
 
-const upload = multer({ storage: multer.memoryStorage() });
 authRouter.post("/login", authController.login);
 authRouter.post(
   "/signup",
