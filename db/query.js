@@ -92,8 +92,8 @@ async function getUserByName(nickname) {
   //   return null;
   // }
 }
-async function getUserById(id) {
-  return await prisma.user.findUnique({ where: id });
+async function getUserById(userId) {
+  return await prisma.user.findUnique({ where: { id: userId } });
 }
 module.exports = {
   getDbPosts,
