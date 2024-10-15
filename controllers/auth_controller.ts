@@ -1,6 +1,6 @@
 const { db } = require("../db/query");
 const jwt = require("jsonwebtoken");
-const { createUser, getUserByName } = require("../db/query");
+const { createUser, getUserByName, getUserById } = require("../db/query");
 const bcrypt = require("bcrypt");
 const { body, validationResult } = require("express-validator");
 async function login(req: any, res: any) {
@@ -60,9 +60,9 @@ async function signup(req: any, res: any) {
     res.status(500).json({ error: error.message || "Error creating user" });
   }
 }
-async function getUserById(req: any, res: any) {
+async function getUser(req: any, res: any) {
   const { id } = req.params;
-  const user = await db.getUserById(id);
+  const user = await getUserById(id);
   res.json(user);
 }
 function createUserValidation() {
@@ -106,5 +106,5 @@ module.exports = {
   signup,
   validateMiddleware,
   createUserValidation,
-  getUserById,
+  getUser,
 };

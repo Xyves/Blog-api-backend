@@ -93,7 +93,7 @@ async function getUserByName(nickname) {
   // }
 }
 async function getUserById(id) {
-  return await prisma.user.findFirst({ where: id });
+  return await prisma.user.findUnique({ where: id });
 }
 module.exports = {
   getDbPosts,

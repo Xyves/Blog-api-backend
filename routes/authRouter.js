@@ -18,5 +18,5 @@ authRouter.get("/logout", (req, res, next) => {
     res.redirect("/");
   });
 });
-authRouter.get("/user/:id", authController.getUserById);
+authRouter.get("/user/:id", authController.getUser);
 module.exports = authRouter;
