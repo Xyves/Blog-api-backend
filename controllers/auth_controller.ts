@@ -4,7 +4,6 @@ console.log(db);
 const { createUser, getUserByName } = require("../db/query");
 const bcrypt = require("bcrypt");
 const { body, validationResult } = require("express-validator");
-
 async function login(req: any, res: any) {
   console.log("Attempting login");
   try {
@@ -62,6 +61,10 @@ async function signup(req: any, res: any) {
     res.status(500).json({ error: error.message || "Error creating user" });
   }
 }
+async function getUserById(req, res) {
+  const { id } = req.params;
+  await db.getUserById(id);
+}
 function createUserValidation() {
   return [
     body("nickname")
@@ -98,4 +101,10 @@ function validateMiddleware(req: any, res: any, next: any) {
   next();
 }
 
-module.exports = { login, signup, validateMiddleware, createUserValidation };
+module.exports = {
+  login,
+  signup,
+  validateMiddleware,
+  createUserValidation,
+  getUserById,
+};

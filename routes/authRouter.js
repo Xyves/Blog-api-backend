@@ -3,7 +3,6 @@ const passport = require("passport");
 const authRouter = express.Router();
 const authController = require("../controllers/auth_controller");
 
-const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
 authRouter.post("/login", authController.login);
 authRouter.post(
@@ -20,4 +19,5 @@ authRouter.get("/logout", (req, res, next) => {
     res.redirect("/");
   });
 });
+authRouter.get("user", authController.getUserById);
 module.exports = authRouter;

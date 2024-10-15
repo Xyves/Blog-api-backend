@@ -92,10 +92,14 @@ async function getUserByName(nickname) {
   //   return null;
   // }
 }
+async function getUserById(id) {
+  return await prisma.user.findFirst({ where: id });
+}
 module.exports = {
   getDbPosts,
   getPost,
   getCommentsByPostId,
+  getUserById,
   getUserComments,
   getUserByName,
   createPost,
