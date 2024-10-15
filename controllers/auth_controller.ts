@@ -61,7 +61,7 @@ async function signup(req: any, res: any) {
     res.status(500).json({ error: error.message || "Error creating user" });
   }
 }
-async function getUserById(req, res) {
+async function getUserById(req: any, res: any) {
   const { id } = req.params;
   const user = await db.getUserById(id);
   res.json(user);
