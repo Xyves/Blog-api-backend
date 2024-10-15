@@ -78,16 +78,6 @@ async function createUser(nickname, password, email, role = "USER") {
     },
   });
 }
-export function createUser(nickname, password, email, role = "User") {
-  return prisma.user.create({
-    data: {
-      nickname,
-      password,
-      email,
-      role,
-    },
-  });
-}
 
 function deleteUser(id) {
   return prisma.user.delete({ where: id });
