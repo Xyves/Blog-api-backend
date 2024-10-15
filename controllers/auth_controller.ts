@@ -63,7 +63,8 @@ async function signup(req: any, res: any) {
 }
 async function getUserById(req, res) {
   const { id } = req.params;
-  await db.getUserById(id);
+  const user = await db.getUserById(id);
+  res.json(user);
 }
 function createUserValidation() {
   return [
