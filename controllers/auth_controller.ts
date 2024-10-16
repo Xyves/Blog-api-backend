@@ -47,6 +47,9 @@ async function login(req: any, res: any) {
 }
 async function signup(req: any, res: any) {
   const { nickname, password, email, role } = req.body;
+  if (!nickname || !password || !email || !role) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
   try {
     const hashedPassword = bcrypt.hashSync(password, 10);
 
