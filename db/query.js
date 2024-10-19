@@ -6,14 +6,17 @@ function getDbPosts() {
     orderBy: {
       created: "desc",
     },
-    take: 14,
+    take: 7,
   });
 }
 function getPost(id) {
   return prisma.post.findFirst({ where: { id: id } });
 }
 function getCategories(postId) {
-  return prisma.post.findMany({ where: { id: postId } });
+  return prisma.post.findMany({
+    where: { id: postId },
+    select: { categories: true },
+  });
 }
 function getCommentsCount(postId) {
   const comments = prisma.comment.findMany({ where: { postId: postId } });

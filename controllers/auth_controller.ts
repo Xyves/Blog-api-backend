@@ -47,7 +47,7 @@ async function login(req: any, res: any) {
 }
 async function signup(req: any, res: any) {
   const { nickname, password, email, role } = req.body;
-  if (!nickname || !password || !email || !role) {
+  if (!nickname || !password || !email) {
     return res.status(400).json({ error: "All fields are required" });
   }
   try {
@@ -57,6 +57,7 @@ async function signup(req: any, res: any) {
 
     // Respond with the newly created user
     res.status(201).json(user);
+    res.redirect("/");
   } catch (error: any) {
     // Using 'any' to assert the error type
     console.error("Error creating user:", error);
