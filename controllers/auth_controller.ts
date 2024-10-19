@@ -55,11 +55,20 @@ async function signup(req: any, res: any) {
 
     const user = await createUser(nickname, hashedPassword, email, role);
 
-    // Respond with the newly created user
-    res.status(201).json(user);
+    const token = jwt.sign(
+      {
+        userId: user.userId,
+        nickname: user.nickname,
+        email: user.email,
+        password: user.hashedPassword,
+        role: user.role,
+      },
+      process.env.SECRET_KEY,
+      { expiresIn: "15m" }
+    );
+    res.status(201).json(token);
     res.redirect("/");
   } catch (error: any) {
-    // Using 'any' to assert the error type
     console.error("Error creating user:", error);
     res.status(500).json({ error: error.message || "Error creating user" });
   }
