@@ -8,9 +8,8 @@ async function login(req: any, res: any) {
   try {
     const { password, nickname } = req.body;
 
-    // Ensure getUserByName is awaited
     const user = await getUserByName(nickname);
-    console.log("User found:", user);
+    console.log("User found:", user.nickname);
 
     if (!user) {
       return res
@@ -58,15 +57,15 @@ async function signup(req: any, res: any) {
     const token = jwt.sign(
       {
         userId: user.userId,
-        nickname: user.nickname,
-        email: user.email,
-        password: user.hashedPassword,
-        role: user.role,
+        nickname: nickname,
+        email,
+        password: hashedPassword,
+        role: role,
       },
       process.env.SECRET_KEY,
       { expiresIn: "15m" }
     );
-    res.status(201).json(token);
+    res.status(201).json({ token });
     res.redirect("/");
   } catch (error: any) {
     console.error("Error creating user:", error);
