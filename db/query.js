@@ -9,7 +9,7 @@ function getDbPosts() {
     take: 7,
   });
 }
-function getPost(id) {
+function getDbPost(id) {
   return prisma.post.findUnique({ where: { id } });
 }
 function getCategories(postId) {
@@ -103,7 +103,7 @@ async function getUserById(userId) {
 }
 module.exports = {
   getDbPosts,
-  getPost,
+  getDbPost,
   getCommentsByPostId,
   getUserById,
   getUserComments,

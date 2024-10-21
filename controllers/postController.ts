@@ -9,7 +9,7 @@ const getPosts = async (req: any, res: any) => {
 const getPost = async (req: any, res: any) => {
   const id = req.params.id;
   console.log(id);
-  const post = await db.getPost(id);
+  const post = await db.getDbPost(id);
   console.log(post);
   if (!post) {
     console.log("Post not found"); // Log when a post is not found
