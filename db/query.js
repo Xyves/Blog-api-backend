@@ -10,7 +10,7 @@ function getDbPosts() {
   });
 }
 function getPost(id) {
-  return prisma.post.findFirst({ where: { id: id } });
+  return prisma.post.findUnique({ where: { id } });
 }
 function getCategories(postId) {
   return prisma.post.findMany({

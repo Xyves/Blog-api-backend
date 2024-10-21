@@ -8,7 +8,9 @@ const getPosts = async (req: any, res: any) => {
 };
 const getPost = async (req: any, res: any) => {
   const id = req.params.id;
+  console.log(id);
   const post = await db.getPost(id);
+  console.log(post);
   if (!post) {
     console.log("Post not found"); // Log when a post is not found
     return res.status(404).json({ error: "Post not found" });
@@ -16,8 +18,14 @@ const getPost = async (req: any, res: any) => {
   res.json(post);
 };
 const createPost = async (req: any, res: any) => {
-  const { title, content, isPublished, userId,categories } = req.body;
-  const post = await db.createPost(title, content, isPublished, userId,categories);
+  const { title, content, isPublished, userId, categories } = req.body;
+  const post = await db.createPost(
+    title,
+    content,
+    isPublished,
+    userId,
+    categories
+  );
   res.json(post);
 };
 const updatePost = async (req: any, res: any) => {
