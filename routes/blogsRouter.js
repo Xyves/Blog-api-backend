@@ -8,7 +8,7 @@ const { verifyToken } = require("../middleware/authMiddleware");
 const upload = multer({ storage: multer.memoryStorage() });
 blogRouter.get("/", postController.getPosts);
 blogRouter.post("/", verifyToken, postController.createPost);
-blogRouter.get("/:id", postController.getPost);
+blogRouter.get(":id", postController.getPost);
 blogRouter.put("/:id", postController.updatePost);
 blogRouter.delete("/:id", postController.deletePost);
 
