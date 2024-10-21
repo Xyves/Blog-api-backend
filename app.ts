@@ -14,7 +14,7 @@ const port = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
-app.use("/api/posts/", blogsRouter);
+app.use("/api/posts", blogsRouter);
 app.use("/api", commentsRouter);
 app.use("/api", authRouter);
 app.all("*", (req: any, res: any) => {
