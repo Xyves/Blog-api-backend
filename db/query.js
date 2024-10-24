@@ -49,7 +49,7 @@ function deletePost(id) {
 
 // COMMENTS CRUD
 function getCommentsByPostId(id) {
-  return prisma.comment.findUnique({ where: id });
+  return prisma.comment.findUnique({ where: { id } });
 }
 
 function getUserComments(userId) {
