@@ -48,8 +48,8 @@ function deletePost(id) {
 }
 
 // COMMENTS CRUD
-function getCommentsByPostId(id) {
-  return prisma.comment.findUnique({ where: { id } });
+function getDbCommentsByPostId(id) {
+  return prisma.comment.findMany({ where: { id } });
 }
 
 function getUserComments(userId) {
@@ -104,7 +104,7 @@ async function getUserById(userId) {
 module.exports = {
   getDbPosts,
   getDbPost,
-  getCommentsByPostId,
+  getDbCommentsByPostId,
   getUserById,
   getUserComments,
   getUserByName,

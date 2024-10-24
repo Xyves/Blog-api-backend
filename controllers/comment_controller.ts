@@ -28,7 +28,7 @@ const deleteComment = async (req: any, res: any) => {
 };
 const getCommentsByPostId = (req: any, res: any) => {
   const { postId } = req.params;
-  const comments = db.getCommentsByPostId(postId);
+  const comments = db.getDbCommentsByPostId(postId);
   res.json(comments);
 };
 export interface Comment {
