@@ -31,7 +31,7 @@ const getCommentsByPostId = async (req: any, res: any) => {
   const id = req.params.id;
   console.log("Id is:" + id);
   console.log(postId);
-  const comments = await db.getDbCommentsByPostId(postId);
+  const comments = await db.getAllCommentsByPostId(postId);
   console.log(comments);
   if (!comments) {
     console.log("comments not found"); // Log when a post is not found

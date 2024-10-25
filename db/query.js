@@ -48,7 +48,7 @@ function deletePost(id) {
 }
 
 // COMMENTS CRUD
-function getDbCommentsByPostId(postId) {
+function getAllCommentsByPostId(postId) {
   console.log(postId);
   return prisma.comment.findMany({ where: { postId } });
 }
@@ -105,7 +105,7 @@ async function getUserById(userId) {
 module.exports = {
   getDbPosts,
   getDbPost,
-  getDbCommentsByPostId,
+  getAllCommentsByPostId,
   getUserById,
   getUserComments,
   getUserByName,
