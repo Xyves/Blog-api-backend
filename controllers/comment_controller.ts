@@ -1,4 +1,4 @@
-const { db } = require("../db/query");
+const db = require("../db/query");
 
 const getCommentById = (req: any, res: any) => {
   const { commentId } = req.params;
