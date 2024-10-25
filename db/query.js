@@ -49,7 +49,8 @@ function deletePost(id) {
 
 // COMMENTS CRUD
 function getDbCommentsByPostId(postId) {
-  return prisma.comment.findMany({ where: { postId: postId } });
+  console.log(postId);
+  return prisma.comment.findMany({ where: { postId } });
 }
 
 function getUserComments(userId) {
