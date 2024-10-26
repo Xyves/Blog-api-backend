@@ -1,4 +1,4 @@
-const { db } = require("../db/query");
+const db = require("../db/query");
 const jwt = require("jsonwebtoken");
 const { createUser, getUserByName, getUserById } = require("../db/query");
 const bcrypt = require("bcrypt");
@@ -112,9 +112,21 @@ function validateMiddleware(req: any, res: any, next: any) {
   }
   next();
 }
-
+function getProfile(req: any, res: any) {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) return res.status(401).send("Access Denied");
+  try {
+    const verifiedUser = jwt.verify(token, process.env.SECRET_KEY);
+    const userId = verifiedUser.id;
+    const user = db.getUserById(userId);
+    res.json({ id: user.id, nickname: user.nickname, role: user.role });
+  } catch (error) {
+    res.status(400).send("Invalid Token");
+  }
+}
 module.exports = {
   login,
+  getProfile,
   signup,
   validateMiddleware,
   createUserValidation,
