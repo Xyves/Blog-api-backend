@@ -13,6 +13,7 @@
     "start1": "nodemon --watch src --exec node --no-warnings=ExperimentalWarning --loader ts-node/esm app.ts",
     "dev": "node --loader ts-node/esm --no-warnings=ExperimentalWarning app.ts"
   },
+  "proxy": "https://http://localhost:5173",
   "keywords": [],
   "author": "",
   "include": [
