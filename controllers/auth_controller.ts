@@ -120,26 +120,16 @@ function getProfile(req: any, res: any) {
   }
   try {
     const verifiedUser = jwt.verify(token, process.env.SECRET_KEY);
-    console.log("Verified user:", verifiedUser);
-
-    const userId = verifiedUser.id;
-    console.log("Extracted userId:", userId);
-    if (!userId) {
-      console.error("userId is undefined");
-      return res.status(400).send("Invalid User ID");
+    console.log("Verified user:", verifiedUser.user);
+    if (!verifiedUser) {
+      console.error("User not found in database");
+      return res.status(404).send("User not found");
     }
-    getUserById(userId)
-      .then((user: any) => {
-        if (!user) {
-          console.error("User not found in database");
-          return res.status(404).send("User not found");
-        }
-        res.json({ id: user.id, nickname: user.nickname, role: user.role });
-      })
-      .catch((error: any) => {
-        console.error("Database error:", error);
-        res.status(500).send("Internal server error");
-      });
+    res.json({
+      id: verifiedUser.user.id,
+      nickname: verifiedUser.user.nickname,
+      role: verifiedUser.user.role,
+    });
   } catch (error) {
     res.status(400).send("Invalid Token");
   }
