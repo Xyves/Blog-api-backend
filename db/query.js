@@ -94,7 +94,6 @@ async function getUserById(userId) {
   }
   return await prisma.user.findUnique({
     where: { id: userId },
-    select: { nickname: true },
   });
 }
 module.exports = {
