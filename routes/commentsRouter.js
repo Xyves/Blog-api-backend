@@ -9,7 +9,7 @@ commentsRouter.get("/:postId/comments", commentsController.getCommentsByPostId);
 commentsRouter.get("/comments/:commentId", commentsController.getCommentById);
 commentsRouter.post(
   "/:postId/comments",
-  verifyToken,
+  // verifyToken,
   commentsController.createComment
 );
 commentsRouter.put(
