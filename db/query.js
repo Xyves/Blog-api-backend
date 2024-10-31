@@ -56,13 +56,14 @@ function getUserComments(userId) {
   // const authorId = "";
   return prisma.comment.findMany({ where: { userId } });
 }
-function createComment(postId, email, nickname) {
+function createComment(postId, message, userId) {
   return prisma.comment.create({
     data: {
-      email,
       nickname,
+      postId,
+      message,
+      userId,
     },
-    where: {},
   });
 }
 function editComment(id, message) {

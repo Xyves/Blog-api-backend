@@ -3,10 +3,10 @@ const commentsRouter = express.Router();
 const { verifyToken } = require("../middleware/authMiddleware");
 const commentsController = require("../controllers/comment_controller");
 
-//Get  Specific comment by id
-commentsRouter.get("/comments/:commentId", commentsController.getCommentById);
 // Get all comments on specific post
 commentsRouter.get("/:postId/comments", commentsController.getCommentsByPostId);
+//Get  Specific comment by id
+commentsRouter.get("/comments/:commentId", commentsController.getCommentById);
 commentsRouter.post(
   "/:postId/comments",
   verifyToken,
