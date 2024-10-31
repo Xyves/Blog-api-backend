@@ -129,14 +129,14 @@ function getProfile(req: any, res: any) {
       return res.status(400).send("Invalid User ID");
     }
     getUserById(userId)
-      .then((user) => {
+      .then((user: any) => {
         if (!user) {
           console.error("User not found in database");
           return res.status(404).send("User not found");
         }
         res.json({ id: user.id, nickname: user.nickname, role: user.role });
       })
-      .catch((error) => {
+      .catch((error: any) => {
         console.error("Database error:", error);
         res.status(500).send("Internal server error");
       });
