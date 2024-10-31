@@ -1,20 +1,33 @@
 const db = require("../db/query");
 
-const getCommentById = (req: any, res: any) => {
+const getCommentById = async (req: any, res: any) => {
   const { commentId } = req.params;
-  const comment = db.getCommentById(commentId);
+  const comment = await db.getCommentById(commentId);
   res.json(comment);
 };
-const getUserComments = (req: any, res: any) => {
+const getUserComments = async (req: any, res: any) => {
   const { userId } = req.params;
-  const comments = db.getUserComments(userId);
+  const comments = await db.getUserComments(userId);
   res.json(comments);
 };
-const createComment = (req: any, res: any) => {
+const createComment = async (req: any, res: any) => {
   const { postId } = req.params;
   const { message, userId } = req.body;
-  const comments = db.createComment(postId, message, userId);
-  return comments;
+
+  if (!message || !userId) {
+    return res.status(400).json({ error: "Message and userId are required" });
+  }
+
+  try {
+    const comment = await db.createComment(postId, message, userId);
+
+    return res.status(201).json(comment);
+  } catch (error) {
+    console.error("Error creating comment:", error);
+    return res
+      .status(500)
+      .json({ error: "An error occurred while creating the comment" });
+  }
 };
 const editComment = async (req: any, res: any) => {
   const { commentId } = req.params;
