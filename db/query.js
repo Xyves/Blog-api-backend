@@ -59,10 +59,9 @@ function getUserComments(userId) {
 function createComment(postId, message, userId) {
   return prisma.comment.create({
     data: {
-      nickname,
-      postId,
-      message,
-      userId,
+      postId: postId,
+      message: message,
+      userId: userId,
     },
   });
 }
