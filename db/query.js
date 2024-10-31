@@ -49,7 +49,6 @@ function deletePost(id) {
 
 // COMMENTS CRUD
 function getAllCommentsByPostId(postId) {
-  console.log(postId);
   return prisma.comment.findMany({ where: { postId } });
 }
 
@@ -87,16 +86,12 @@ function deleteUser(id) {
   return prisma.user.delete({ where: id });
 }
 async function getUserByName(nickname) {
-  console.log("Trying");
   return await prisma.user.findUnique({ where: { nickname } });
-  // const match = await bcrypt.compare(password, user.password);
-  // if (match) {
-  //   return user;
-  // } else {
-  //   return null;
-  // }
 }
 async function getUserById(userId) {
+  if (!userId) {
+    throw new Error("userId is undefined");
+  }
   return await prisma.user.findUnique({
     where: { id: userId },
     select: { nickname: true },

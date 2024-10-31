@@ -114,12 +114,32 @@ function validateMiddleware(req: any, res: any, next: any) {
 }
 function getProfile(req: any, res: any) {
   const token = req.headers.authorization?.split(" ")[1];
-  if (!token) return res.status(401).send("Access Denied");
+  if (!token) {
+    console.error("No token found, access denied");
+    return res.status(401).send("Access Denied");
+  }
   try {
     const verifiedUser = jwt.verify(token, process.env.SECRET_KEY);
+    console.log("Verified user:", verifiedUser);
+
     const userId = verifiedUser.id;
-    const user = db.getUserById(userId);
-    res.json({ id: user.id, nickname: user.nickname, role: user.role });
+    console.log("Extracted userId:", userId);
+    if (!userId) {
+      console.error("userId is undefined");
+      return res.status(400).send("Invalid User ID");
+    }
+    getUserById(userId)
+      .then((user) => {
+        if (!user) {
+          console.error("User not found in database");
+          return res.status(404).send("User not found");
+        }
+        res.json({ id: user.id, nickname: user.nickname, role: user.role });
+      })
+      .catch((error) => {
+        console.error("Database error:", error);
+        res.status(500).send("Internal server error");
+      });
   } catch (error) {
     res.status(400).send("Invalid Token");
   }
