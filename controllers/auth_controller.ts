@@ -28,7 +28,7 @@ async function login(req: any, res: any) {
     // Generate JWT token
     const secret = process.env.SECRET_KEY;
     jwt.sign(
-      { user: { id: user.id, nickname: user.nickname } },
+      { user: { id: user.id, nickname: user.nickname, role: user.role } },
       secret,
       { expiresIn: "30m" },
       (err: any, token: string) => {
