@@ -14,7 +14,7 @@ authRouter.get("/logout", (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.redirect("/");
+    res.redirect("/blogs");
   });
 });
 authRouter.get("/user/me", authController.getProfile);
