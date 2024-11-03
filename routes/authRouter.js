@@ -5,7 +5,7 @@ const authController = require("../controllers/auth_controller");
 authRouter.post("/login", authController.login);
 authRouter.post(
   "/signup",
-  // authController.createUserValidation(),
+  authController.createUserValidation(),
   authController.validateMiddleware,
   authController.signup
 );

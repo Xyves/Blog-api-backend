@@ -41,13 +41,9 @@ const deleteComment = async (req: any, res: any) => {
 };
 const getCommentsByPostId = async (req: any, res: any) => {
   const postId = req.params.postId;
-  const id = req.params.id;
-  console.log("Id is:" + id);
-  console.log(postId);
   const comments = await db.getAllCommentsByPostId(postId);
-  console.log(comments);
   if (!comments) {
-    console.log("comments not found"); // Log when a post is not found
+    console.log("comments not found");
     return res.status(404).json({ error: "comments not found" });
   }
 

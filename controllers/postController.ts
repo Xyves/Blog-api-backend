@@ -3,16 +3,13 @@ const express = require("express");
 
 const getPosts = async (req: any, res: any) => {
   const Posts = await db.getDbPosts();
-  console.log(Posts);
   res.json(Posts);
 };
 const getPost = async (req: any, res: any) => {
   const id = req.params.id;
-  console.log(id);
   const post = await db.getDbPost(id);
-  console.log(post);
   if (!post) {
-    console.log("Post not found"); // Log when a post is not found
+    console.log("Post not found");
     return res.status(404).json({ error: "Post not found" });
   }
   res.json(post);

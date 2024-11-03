@@ -9,7 +9,6 @@ async function login(req: any, res: any) {
     const { password, nickname } = req.body;
 
     const user = await getUserByName(nickname);
-    console.log("User found:", user.nickname);
 
     if (!user) {
       return res
@@ -94,15 +93,6 @@ function createUserValidation() {
       .withMessage(
         "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
       ),
-
-    body("passwordConfirmation").custom(
-      (value: string, { req }: { req: any }) => {
-        if (value !== req.body.password) {
-          throw new Error("Password confirmation does not match password");
-        }
-        return true;
-      }
-    ),
   ];
 }
 function validateMiddleware(req: any, res: any, next: any) {
@@ -120,7 +110,7 @@ function getProfile(req: any, res: any) {
   }
   try {
     const verifiedUser = jwt.verify(token, process.env.SECRET_KEY);
-    console.log("Verified user:", verifiedUser.user);
+    console.log("Verified user:", verifiedUser.user.nickname);
     if (!verifiedUser) {
       console.error("User not found in database");
       return res.status(404).send("User not found");
