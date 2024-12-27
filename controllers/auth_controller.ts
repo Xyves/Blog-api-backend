@@ -55,7 +55,7 @@ async function signup(req: any, res: any) {
 
     const token = jwt.sign(
       {
-        userId: user.userId,
+        id: user.id,
         nickname: nickname,
         email,
         password: hashedPassword,
