@@ -121,7 +121,7 @@ function getProfile(req: any, res: any) {
       nickname: verifiedUser.user.nickname,
       role: verifiedUser.user.role,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("JWT verification failed:", error.message);
     return res.status(400).json({ error: "Invalid Token" }); // ✅ Return JSON
   }
