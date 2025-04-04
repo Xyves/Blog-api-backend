@@ -73,6 +73,7 @@ async function signup(req: any, res: any) {
 }
 async function getUser(req: any, res: any) {
   const { id } = req.params;
+  console.log("id is equal to:", id);
   const user = await getUserById(id);
   res.json(user);
 }

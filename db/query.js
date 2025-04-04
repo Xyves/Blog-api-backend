@@ -86,13 +86,13 @@ function deleteUser(id) {
   return prisma.user.delete({ where: id });
 }
 async function getUserByName(nickname) {
-  return prisma.user.findUnique({ where: { nickname } });
+  return prisma.user.findFirst({ where: { nickname } });
 }
 async function getUserById(userId) {
   if (!userId) {
     throw new Error("userId is undefined");
   }
-  return prisma.user.findUnique({
+  return prisma.user.findFirst({
     where: { id: userId },
   });
 }
