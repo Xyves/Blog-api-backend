@@ -10,7 +10,8 @@ app.use(
   cors({
     origin: "https://blog-api-xyves.netlify.app",
     methods: "GET, POST, PUT, DELETE",
-    allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept",
+    allowedHeaders:
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   })
 );
 app.options("*", cors());
