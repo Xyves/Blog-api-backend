@@ -6,7 +6,6 @@ const authRouter = require("./routes/authRouter");
 const commentsRouter = require("./routes/commentsRouter");
 const port = 3000;
 const cors = require("cors");
-app.options("*", cors());
 app.use(
   cors({
     origin: "*",
@@ -14,14 +13,8 @@ app.use(
     allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept",
   })
 );
-app.use((req: any, res: any, next: any) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+app.options("*", cors());
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
