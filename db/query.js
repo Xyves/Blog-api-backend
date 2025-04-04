@@ -73,7 +73,7 @@ function deleteComment(id) {
 }
 async function createUser(nickname, password, email, role = "USER") {
   return prisma.user.create({
-    data: {f
+    data: {
       nickname,
       password,
       email,
@@ -86,13 +86,13 @@ function deleteUser(id) {
   return prisma.user.delete({ where: id });
 }
 async function getUserByName(nickname) {
-  return  prisma.user.findUnique({ where: { nickname } });
+  return prisma.user.findUnique({ where: { nickname } });
 }
 async function getUserById(userId) {
   if (!userId) {
     throw new Error("userId is undefined");
   }
-  return  prisma.user.findUnique({
+  return prisma.user.findUnique({
     where: { id: userId },
   });
 }
