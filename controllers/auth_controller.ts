@@ -116,13 +116,14 @@ function getProfile(req: any, res: any) {
       console.error("User not found in database");
       return res.status(404).send("User not found");
     }
-    res.json({
+    return res.status(200).json({
       id: verifiedUser.user.id,
       nickname: verifiedUser.user.nickname,
       role: verifiedUser.user.role,
     });
   } catch (error) {
-    res.status(400).send("Invalid Token");
+    console.error("JWT verification failed:", error.message);
+    return res.status(400).json({ error: "Invalid Token" }); // ✅ Return JSON
   }
 }
 module.exports = {
