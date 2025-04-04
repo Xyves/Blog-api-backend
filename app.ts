@@ -8,7 +8,7 @@ const port = 3000;
 const cors = require("cors");
 app.use(
   cors({
-    origin: "*",
+    origin: "https://blog-api-xyves.netlify.app",
     methods: "GET, POST, PUT, DELETE",
     allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept",
   })
